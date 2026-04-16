@@ -1,0 +1,40 @@
+# Dockerfile.history.oficial
+FROM spark:3.5.0
+
+ARG spark_version="3.5.0"
+
+
+LABEL author="Edmilson Alves"
+LABEL image="spark-history-server"
+LABEL build_date="${created_date}"
+LABEL version="${spark_version}"
+
+ENV SPARK_HOME=/opt/spark
+ENV SPARK_LOG_DIR=/var/log/spark
+
+# Diretório onde os workers/master vão gravar os event logs
+ENV SPARK_HISTORY_FS_LOG_DIRECTORY=/opt/spark/logs/events
+ENV SPARK_EVENT_LOG_DIR=${SPARK_HISTORY_FS_LOG_DIRECTORY}
+
+ENV SPARK_HISTORY_UI_PORT=18080
+ENV SPARK_EVENTLOG_ENABLED=true
+ENV SPARK_DAEMON_MEMORY=10g
+ENV SPARK_HISTORY_FS_CLEANER_ENABLED=true
+ENV SPARK_HISTORY_STORE_MAXDISKUSAGE=100g
+ENV SPARK_HISTORY_FS_CLEANER_INTERVAL=8h
+ENV SPARK_HISTORY_FS_CLEANER_MAXAGE=5d
+ENV SPARK_HISTORY_FS_UPDATE_INTERVAL=10s
+ENV SPARK_HISTORY_RETAINEDAPPLICATIONS=100
+ENV SPARK_HISTORY_UI_MAXAPPLICATIONS=500
+
+# Flags extras do history server (importante!)
+ENV SPARK_HISTORY_OPTS="-Dspark.history.fs.logDirectory=${SPARK_HISTORY_FS_LOG_DIRECTORY}"
+
+# Só pra garantir que o diretório existe
+RUN mkdir -p ${SPARK_HISTORY_FS_LOG_DIRECTORY}
+
+# Se tiver configs customizadas de log / spark, você pode copiar aqui:
+# COPY config/history/conf/* ${SPARK_HOME}/conf/
+
+# Rodar o History Server em foreground (o Docker cuida do processo)
+ENTRYPOINT ["bash", "-c", "spark-class org.apache.spark.deploy.history.HistoryServer"]

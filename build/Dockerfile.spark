@@ -1,0 +1,27 @@
+# Dockerfile.spark (agora usando imagem oficial!)
+FROM spark:3.5.0
+
+USER root
+
+# Se quiser libs extras além do que já vem na imagem oficial
+RUN apt-get update && apt-get install -y python3-pip curl && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV SPARK_HOME=/opt/spark
+
+# Diretório para event logs (History Server)
+RUN mkdir -p ${SPARK_HOME}/logs/events
+
+# Suas configs de Spark
+COPY config/spark/spark-defaults.conf ${SPARK_HOME}/conf/
+COPY config/spark/jars ${SPARK_HOME}/jars
+COPY config/spark/log4j2.properties ${SPARK_HOME}/conf/
+
+# Dependências Python
+COPY requirements.txt ${SPARK_HOME}/conf/requirements.txt
+
+# Instala requirements + Jupyter + Kernel
+RUN pip3 install --no-cache-dir -r ${SPARK_HOME}/conf/requirements.txt && \
+    pip3 install --no-cache-dir ipykernel notebook jupyterlab
+
+EXPOSE 8080 7077 18080 8888
