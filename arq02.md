@@ -1,0 +1,7 @@
+Bom, nesta etapa baixamos a extensão Dev Containers para, através do comando "Attach to Running Container", entrar no VS Code dentro do container e desenvolver diretamente de lá. Ao tentar executar um arquivo Jupyter que usa o PySpark, notamos que o Python não encontra o PySpark. Então, usamos o comando which pyspark para encontrá-lo e, através dos comandos sys.path.append("/usr/local/spark/python") e sys.path.append("/usr/local/spark/python/lib/py4j-0.10.9.7-src.zip"), adicioná-lo às pastas onde o Python procura.
+
+Ele serve para: Modificar dinamicamente o caminho de busca (sys.path) do Python em tempo de execução, forçando o interpretador a reconhecer e importar bibliotecas ou pacotes que estão instalados em pastas personalizadas ou fora do diretório padrão do sistema.
+
+No meu projeto ele serve para: Apontar manualmente para o Python do VS Code onde estão os arquivos do PySpark e a biblioteca Py4J (que faz a ponte entre o Python e o Java do Spark), resolvendo o erro de ModuleNotFoundError e permitindo que eu execute meus notebooks perfeitamente de dentro do container.
+
+Algumas de suas aplicações são: Configuração rápida de ambientes de desenvolvimento complexos, integração de ferramentas de Big Data com IDEs locais (como VS Code ou PyCharm), e desenvolvimento com pacotes customizados ou internos de uma empresa que não estão publicados no gerenciador oficial (PyPI/pip).
