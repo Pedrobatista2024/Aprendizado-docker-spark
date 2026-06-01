@@ -1,0 +1,7 @@
+Bom, nesta etapa nós criamos o docker compose do nosso primeiro container. Criamos um arquivo chamado docker-compose.yml com o conteúdo configurando o serviço do Postgres, criamos um arquivo .env para armazenar as variáveis de ambiente e, finalmente, entramos na pasta onde está o arquivo docker compose e demos o comando docker compose up -d.
+
+Ele serve para: Orquestrar, configurar e iniciar múltiplos containers de forma automatizada a partir de um único arquivo declarativo (YAML), gerenciando também a criação de redes isoladas, volumes persistentes e a leitura de variáveis de ambiente de forma segura.
+
+No meu projeto ele serve para: Subir um banco de dados PostgreSQL totalmente configurado, mapeando as credenciais de acesso seguras vindas do arquivo .env, garantindo que os dados não sejam perdidos (volume pgdata) e conectando o banco a uma rede específica (build_spark-net) para que o Spark consiga se comunicar com ele futuramente.
+
+Algumas de suas aplicações são: Criação de ambientes locais multi-container (ex: subir uma aplicação web junto com seu banco de dados e um sistema de cache), automação de ambientes de testes em esteiras de CI/CD, e padronização da infraestrutura de desenvolvimento para que qualquer desenvolvedor suba a stack completa com apenas um comando.
