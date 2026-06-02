@@ -1,0 +1,7 @@
+Bom, nessa etapa nós testamos o postgres que subimos. Usamos a extensão PostgreSQL da Microsoft para nos conectarmos com o banco postgres e, após fazermos a conexão, criamos um arquivo SQL com o conteúdo para criar uma tabela de produtos, inserir três registros e realizar uma consulta de teste, com o intuito de testar nosso banco.
+
+Ele serve para: Validar a conectividade, a persistência e o correto funcionamento do banco de dados relacional que foi isolado no container, garantindo que a estrutura de tabelas e a manipulação de dados estejam operando sem erros através de uma interface de desenvolvimento (IDE).
+
+No meu projeto ele serve para: Confirmar que o container do PostgreSQL está pronto para uso, testando a criação de tabelas (CREATE TABLE), a inserção de dados fictícios (INSERT INTO) e a recuperação de registros (SELECT), preparando a base de dados que servirá como origem ou destino para os futuros pipelines de dados com o Spark.
+
+Algumas de suas aplicações são: Criação de schemas e bancos de dados transacionais (OLTP) para sistemas web, estruturação de áreas de staging ou data marts para engenharia de dados, e realização de testes rápidos de carga e consultas SQL durante a fase de desenvolvimento de uma aplicação.
