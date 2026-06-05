@@ -1,0 +1,7 @@
+Nesta etapa, criei a estrutura de pastas necessária, adicionei as dependências no arquivo requirements.txt, configurei a supressão de logs repetitivos no log4j2.properties, estabeleci parâmetros de execução e auditoria no spark-defaults.conf e escrevi os arquivos dockerfile.spark e dockerfile.history.
+
+Eles servem para: Customizar e construir imagens Docker personalizadas (via Dockerfiles), gerenciar bibliotecas externas do ecossistema de dados e configurar finamente o comportamento operacional, o consumo de recursos e a persistência de logs de auditoria do Spark Engine e do seu servidor de histórico.
+
+No meu código eles servem para: Instalar ferramentas essenciais na imagem principal (como gerenciadores de pacotes, JupyterLab, bibliotecas Delta Lake e ferramentas de métricas), silenciar mensagens de log desnecessárias deixando apenas avisos importantes (WARN), limitar o uso de memória a 2g e habilitar a geração de logs de eventos para que o Spark History Server consiga ler e reconstruir a interface gráfica das queries processadas no passado.
+
+Algumas de suas aplicações são: Construção de ambientes corporativos de Big Data padronizados e reprodutíveis em Kubernetes ou clusters gerenciados, otimização de performance e tuning de recursos de memória/CPU para jobs de processamento de dados massivos, e auditoria pós-execução (post-mortem) de pipelines de dados para identificação de gargalos de desempenho e falhas operacionais.
