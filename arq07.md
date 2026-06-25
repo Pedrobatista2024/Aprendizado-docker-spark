@@ -1,0 +1,7 @@
+Nesta etapa, nós criamos o arquivo docker-compose.yml estruturando um ecossistema distribuído com um nó Master, três nós Workers e um nó de History Server rodando em uma rede isolada.
+
+Ele serve para: Orquestrar e simular uma infraestrutura de computação distribuída (cluster de Big Data) localmente, gerenciando o ciclo de vida de múltiplos nós dependentes que precisam se comunicar de maneira coordenada e compartilhar o mesmo sistema de arquivos.
+
+No meu código eles servem para: Subir o spark-master como o gerenciador central de recursos (gerenciando a Web UI na porta 8080 e escutando na porta 7077), inicializar três spark-workers paralelos com limites específicos de hardware (2 cores de processamento e 3GB de memória RAM cada) que apontam para o nó central, e instanciar o spark-history-server na porta 18080 conectado aos volumes compartilhados para permitir a leitura e auditoria dos eventos passados.
+
+Algumas de suas aplicações são: Homologação e teste de arquiteturas escaláveis em ambientes de desenvolvimento locais antes do deploy em nuvem, simulação de cargas reais de processamento distribuído com múltiplos nós de execução concorrentes (estressando partições e paralelismo), e empacotamento completo de ecossistemas corporativos de dados para reprodutibilidade imediata entre novos membros de uma equipe de engenharia.
