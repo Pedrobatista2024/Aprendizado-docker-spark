@@ -1,0 +1,7 @@
+Nesta etapa, demos o comando docker build -f Dockerfile.spark -t eng-spark:3.5 . e docker build -f Dockerfile.history -t eng-spark-history-server:3.5 . e depois demos o comando docker-compose up -d.
+
+Eles servem para: Compilar e gerar imagens Docker customizadas (docker build) a partir de instruções declaradas em arquivos Dockerfiles, atribuindo uma tag/nome específico a elas, e em seguida inicializar toda a infraestrutura multi-container definida no arquivo de orquestração (docker-compose up -d) em segundo plano.
+
+No meu código eles servem para: Criar localmente as imagens personalizadas do Spark (eng-spark:3.5) e do History Server com todas as nossas dependências do Python e configurações do Spark injetadas, e logo após, subir o cluster inteiro (Master, três Workers e o History Server) de uma única vez, prontos e conectados na mesma rede.
+
+Algumas de suas aplicações são: Criação e atualização de ambientes de esteiras automatizadas de integração contínua (CI/CD) onde novas imagens de software precisam ser geradas e testadas a cada modificação do código, empacotamento de soluções de software corporativas para distribuição simplificada, e provisionamento rápido de infraestruturas locais idênticas às de produção com comandos únicos.

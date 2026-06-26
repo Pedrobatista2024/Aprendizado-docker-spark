@@ -1,4 +1,4 @@
-pypark==3.5.1
+pyspark==3.5.0
 pandas==2.0.3
 pyarrow==16.1.0
 sparkmeasure==0.24.0
