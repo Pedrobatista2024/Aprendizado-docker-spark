@@ -1,0 +1,7 @@
+Nesta etapa, nós entramos dentro do container spark-master através do Dev Containers (usando a opção Attach in New Window) e rodamos um script interativo de teste em PySpark para ler um arquivo CSV de E-Commerce e exibir os dados.
+
+Ele serve para: Validar se a SparkSession consegue se conectar com sucesso ao cluster gerenciado pelo nó Master remoto, alocar recursos nos nós Workers de forma distribuída, processar o carregamento de arquivos externos e liberar os recursos ao final da execução.
+
+No meu código eles servem para: Criar um aplicativo chamado "teste-master", apontar explicitamente para o gerenciador de recursos central através do endereço spark://spark-master:7077 (em vez de rodar isolado na máquina local), limitar o uso de memória por executor para 512m para não estressar os containers, ler o dataset de categorias de comércio eletrônico infereindo os tipos de colunas automaticamente e imprimir o resultado estruturado na tela antes de encerrar o contexto com spark.stop().
+
+Algumas de suas aplicações são: Desenvolvimento e teste de rotinas de ingestão de dados em clusters de nuvem antes de transformá-las em jobs automatizados, validação de conectividade de rede e comunicação interna entre gerenciadores de nós e executores, e exploração interativa de grandes volumes de dados de vendas, logs e cadastros estruturados de forma distribuída.
