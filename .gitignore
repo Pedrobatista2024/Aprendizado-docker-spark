@@ -1,2 +1,40 @@
-.env
+# ==========================================
+# 1. DADOS E INFRAESTRUTURA (STORAGE)
+# ==========================================
+# Ignora absolutamente tudo dentro do storage (CSVs, MinIO, etc.)
+project/storage/
+
+# ==========================================
+# 2. LOGS E MÉTRICAS
+# ==========================================
+# Ignora os históricos de execução do Spark
 project/logs/
+project/metrics/
+
+# Ignora os logs do Airflow
+project/resources/airflow/logs/
+
+# ==========================================
+# 3. SEGURANÇA E SENHAS
+# ==========================================
+# NUNCA suba o arquivo .env (ele contém as senhas do MinIO e Postgres)
+.env
+
+# ==========================================
+# 4. LIXO DE SISTEMA OPERACIONAL E CACHE
+# ==========================================
+# Metadados de download do Windows/WSL
+*:Zone.Identifier
+
+# Arquivos temporários do macOS e Windows
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# 5. AMBIENTE DE DESENVOLVIMENTO (PYTHON E IDE)
+# ==========================================
+# Arquivos gerados pelo VS Code e Jupyter Notebook
+.vscode/
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
