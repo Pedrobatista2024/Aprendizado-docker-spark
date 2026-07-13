@@ -1,0 +1,7 @@
+Nesta etapa, nós adicionamos o serviço do MinIO ao nosso arquivo docker-compose.yml, subimos o container na rede do cluster e testamos a ferramenta criando um bucket (balde) e carregando alguns dados de forma manual.
+
+Ele serve para: Fornecer um servidor de armazenamento de objetos de alta performance, 100% de código aberto e totalmente compatível com a API do Amazon S3, permitindo simular e gerenciar uma infraestrutura de Data Lake de forma local.
+
+No meu código eles servem para: Criar o container do MinIO com a versão mais recente (latest), liberando a porta 9000 para a comunicação da API de dados com o Spark e a porta 9001 para acessarmos o painel visual (Console) pelo navegador, utilizando variáveis de ambiente seguras para o usuário/senha e garantindo que os dados fiquem salvos de verdade na pasta minio_data do meu computador através de volumes.
+
+Algumas de suas aplicações são: Criação de Data Lakes e Lakehouses locais para testes de engenharia de dados (armazenando arquivos brutos em formatos como Parquet, CSV ou tabelas Delta), simulação exata de ambientes de nuvem baseados em AWS S3 sem gerar custos financeiros de nuvem durante o desenvolvimento, e armazenamento seguro de backups, mídias e logs de grandes sistemas.
