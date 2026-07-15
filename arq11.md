@@ -1,0 +1,7 @@
+Nesta etapa, nós criamos um notebook de teste chamado minio.ipynb dentro do nosso projeto para validar a integração de ponta a ponta entre o Spark, o armazenamento de objetos no MinIO (via protocolo S3A) e o ecossistema de tabelas Delta (Delta Lake).
+
+Ele serve para: Validar programaticamente a conectividade e a autenticação segura do Spark com o armazenamento de objetos remoto, possibilitando carregar arquivos raw (brutos), persistir os dados processados em um formato de tabela transacional (Delta) e ler metadados históricos desse armazenamento.
+
+No meu projeto ele serve para: Instalar a biblioteca python-dotenv para carregar as credenciais de acesso de forma segura e injetá-las como variáveis no Spark, configurar o mecanismo Hadoop AWS para traduzir requisições s3a:// para o endpoint local do MinIO, ler o arquivo de categorias, escrever esses dados de volta como uma tabela Delta na camada Bronze e executar comandos SQL de manutenção (DESCRIBE DETAIL e DESCRIBE HISTORY) para auditar o histórico de alterações realizadas na tabela.
+
+Algumas de suas aplicações são: Implementação de arquiteturas de Lakehouse modernas locais ou em nuvem (utilizando formatos abertos como Delta Lake ou Apache Iceberg), automação de pipelines de ingestão de dados resilientes de ponta a ponta que garantem transações ACID (evitando corrupção de arquivos), e auditoria completa de auditoria de dados (data lineage) para rastrear modificações e permitir consultas no tempo (recurso de Time Travel do Delta Lake).

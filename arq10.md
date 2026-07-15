@@ -1,4 +1,5 @@
-Nesta etapa, nós adicionamos o serviço do MinIO ao nosso arquivo docker-compose.yml, subimos o container na rede do cluster e testamos a ferramenta criando um bucket (balde) e carregando alguns dados de forma manual.
+Nesta etapa, nós adicionamos o serviço do MinIO ao nosso arquivo docker-compose.yml, subimos o container na rede do cluster e testamos a ferramenta criando um bucket (balde) e carregando alguns dados de forma manual,
+exploramos o minio tambem pelo terminal usando seus pricipais comandos.
 
 Ele serve para: Fornecer um servidor de armazenamento de objetos de alta performance, 100% de código aberto e totalmente compatível com a API do Amazon S3, permitindo simular e gerenciar uma infraestrutura de Data Lake de forma local.
 
