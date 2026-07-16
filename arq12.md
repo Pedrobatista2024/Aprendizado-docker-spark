@@ -1,0 +1,7 @@
+Nesta etapa, nós criamos o notebook miniomanipulacao.ipynb para testar e validar operações de manipulação de dados em tabelas registradas no catálogo metastore do Spark, utilizando comandos SQL integrados com o ecossistema Delta Lake armazenado no MinIO.
+
+Ele serve para: Gerenciar bases de dados, tabelas externas e metadados diretamente através de comandos Spark SQL nativos, executando ações transacionais complexas como deleção e atualização diretamente no Data Lake de forma segura.
+
+No meu código eles servem para: Criar o banco de dados bronze mapeado para o diretório correspondente no MinIO, registrar a tabela bronze.Categoria apontando para os arquivos Delta existentes, trocar o contexto ativo do catálogo com o comando USE bronze, ler as tabelas disponíveis e realizar comandos de modificação de dados (como excluir o registro com id = 3 com DELETE FROM), além de ler as versões geradas por essas alterações usando a auditoria do histórico Delta.
+
+Algumas de suas aplicações são: Criação de rotinas automatizadas de conformidade e governança de dados (como a remoção obrigatória de registros de usuários para cumprir regulamentações como a LGPD), controle estruturado de tabelas em arquiteturas Lakehouse de produção permitindo que analistas de dados façam consultas utilizando apenas SQL tradicional, e restauração rápida de dados para estados anteriores (Time Travel) caso ocorra algum erro durante o processamento de cargas diárias.
