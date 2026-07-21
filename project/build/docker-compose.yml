@@ -6,44 +6,45 @@ services:
   # Minio (S3 para testes com spark)
   # ======================================
 
-  minio:
-    #image: minio/minio:RELEASE.2025-04-22T22-12-26Z
-    #image: minio/minio:RELEASE.2025-05-24T17-08-30Z-cpuv1
-    image: minio/minio:latest
-    container_name: minio
-    hostname: minio
-    command: server /data --console-address ":9001"
-    environment:
-      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
-      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    volumes:
-      - ${APP_STORAGE_PATH}/minio_data:/data
-    networks:
-      - spark-net
+  #minio:
+  #  #image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+  #  #image: minio/minio:RELEASE.2025-05-24T17-08-30Z-cpuv1
+  #  image: minio/minio:latest
+  #  container_name: minio
+  #  hostname: minio
+  #  command: server /data --console-address ":9001"
+  #  environment:
+  #    - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+  #    - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+  #  ports:
+  #    - "9000:9000"
+  #    - "9001:9001"
+  #  volumes:
+  #    - ${APP_STORAGE_PATH}/minio_data:/data
+  #  networks:
+  #    - spark-net
 
   
   # ======================================
   # azurite-storage
   # ======================================
-  #azurite:
-  #  image: mcr.microsoft.com/azure-storage/azurite
-  #  container_name: azurite
-  #  hostname: myaccount.blob.core.windows.net
-  #  command: 
-  #    azurite-blob
-  #    --blobHost 0.0.0.0
-  #    --blobPort 80
-  #  environment:
-  #    - AZURITE_ACCOUNTS=myaccount:az123456
-  #  ports:
-  #    -"10000:80"
-  #  volumes:
-  #    -./azurite-data:/data
-  #  networks:
-  #    - spark-net
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: azurite
+    # 1. Fazemos ele ouvir na porta 80 internamente (para o Spark achar) e 10000 externamente
+    command: azurite --blobHost 0.0.0.0 --blobPort 80
+    ports:
+      - "10000:80"
+      - "10001:10001"
+      - "10002:10002"
+    volumes:
+      - ./azurite-data:/data
+    networks:
+      spark-net:
+        # 2. ENGANAMOS O SPARK: Criamos um "Alias" (Apelido) na rede.
+        # Agora o Spark acha que o Azurite é a nuvem de verdade!
+        aliases:
+          - devstoreaccount1.blob.core.windows.net
 #
 #
   ## ======================================

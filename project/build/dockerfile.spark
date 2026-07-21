@@ -2,20 +2,34 @@ FROM spark:3.5.0
 
 USER root
 
+# Instala ferramentas básicas do Linux (pip e curl)
 RUN apt-get update && apt-get install -y python3-pip curl && \ 
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV SPARK_HOME=/opt/spark
 
+# Cria a pasta para o Spark History Server não dar erro
 RUN mkdir -p $SPARK_HOME/logs/events
 
+# =================================================================
+# A MÁGICA ACONTECE AQUI: Baixando APENAS os pacotes do Delta Lake
+# (O Azure deixaremos para o Jupyter baixar junto com as dependências)
+# =================================================================
+RUN cd ${SPARK_HOME}/jars && \
+    curl -O https://repo1.maven.org/maven2/io/delta/delta-spark_2.12/3.0.0/delta-spark_2.12-3.0.0.jar && \
+    curl -O https://repo1.maven.org/maven2/io/delta/delta-storage/3.0.0/delta-storage-3.0.0.jar
+
+# Copia as suas configurações da sua máquina para o container
 COPY config/spark/spark-defaults.conf ${SPARK_HOME}/conf/
-COPY config/spark/jars ${SPARK_HOME}/jars
+COPY config/spark/jars ${SPARK_HOME}/jars 
 COPY config/spark/log4j2.properties ${SPARK_HOME}/conf/
 
+# Copia a lista de bibliotecas Python
 COPY requirements.txt ${SPARK_HOME}/conf/requirements.txt
 
+# Instala as bibliotecas Python e o ambiente Jupyter
 RUN pip3 install --no-cache-dir -r ${SPARK_HOME}/conf/requirements.txt && \
     pip3 install --no-cache-dir ipykernel notebook jupyterlab
 
+# Documenta as portas que o container vai usar
 EXPOSE 8080 7077 18080 8888

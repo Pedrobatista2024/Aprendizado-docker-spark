@@ -1,0 +1,7 @@
+Nesta etapa, nós criamos o notebook azure.ipynb para conectar o Spark localmente a um emulador do Azure Blob Storage (Azurite), superando diversos desafios técnicos de configuração de Docker, resolução de DNS interna, isolamento de ClassLoaders do Java e gerenciamento de dependências.
+
+Ele serve para: Validar a integração e o processamento de dados do Spark com ecossistemas de nuvem da Microsoft Azure em ambiente de desenvolvimento local, utilizando o protocolo WASB/WASBS para leitura de arquivos brutos e escrita em tabelas transacionais Delta Lake.
+
+No meu código eles servem para: Configurar a SparkSession baixando dinamicamente o pacote hadoop-azure e o SDK de armazenamento da Azure com suas 22 sub-dependências, autenticar no emulador de nuvem local Azurite utilizando a chave padrão (devstoreaccount1), ler o arquivo Produto.csv localizado no bucket simulado da Azure (wasb://project@...), converter e salvar esses dados no formato transacional Delta na camada Bronze, e confirmar a gravação lendo o resultado via Spark SQL e inspecionando os metadados com DESCRIBE DETAIL.
+
+Algumas de suas aplicações são: Desenvolvimento e homologação off-line de pipelines de dados destinados a arquiteturas em nuvem da Microsoft (como Azure Data Lake Storage Gen2, Azure Synapse e Databricks) sem custo de infraestrutura, migração de rotinas legadas locais para ambientes de nuvem pública, e automação de testes de integração ponta a ponta que garantem o correto funcionamento de drivers e bibliotecas do ecossistema Azure antes de realizar o deploy em produção.
